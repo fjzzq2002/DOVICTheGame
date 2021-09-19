@@ -104,7 +104,9 @@ var voting_room = new Phaser.Class({
         }
         // listen on the socket for end-of-vote
         bar_drawn = false;
+        var passed_out=false;
         var check_info=function(info_dic) {
+            if(passed_out) return;
             if(info_dic['phase']==1) {
                 const zeroPad = (num, places) => String(num).padStart(places, '0');
                 nums[-3].text='day '+info_dic.day;
@@ -152,7 +154,8 @@ var voting_room = new Phaser.Class({
                 for(var bt of Object.values(nums)) {
                     bt.destroy();
                 }
-                socket.off('update_info', check_info);
+                passed_out=true;
+//                socket.off('update_info', check_info);
                 r.destroy();
                 self.scene.stop();
             }
