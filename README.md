@@ -5,7 +5,12 @@ A HackMIT project by Andy Liu, Mingyang Deng, Shengtong Zhang, Ziqian Zhong.
 
 #### Setup
 
-Run `node server.js` to start a local server.
+Run `node server.js` to start a local server. The game can be accessed at 127.0.0.1:8084.
+
+#### Notes
+
+1. The circle around each player denotes the infection radius. 
+2. The super spreader has three modes. Press "1" to not infect anyone, press "2" to become infectious, and press "3" to become symptomatic.
 
 #### Screenshots
 
