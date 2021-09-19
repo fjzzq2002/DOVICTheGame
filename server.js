@@ -193,7 +193,9 @@ function ran_pl(ids) {
         player_info[ids].x = gen_rand([-300, 300]);
         player_info[ids].y = gen_rand([-300, 300]);
         
-        if (player_info[ids].x ** 2 + player_info[ids].y ** 2 > 200 ** 2) continue;
+        if (player_info[ids].x ** 2 + player_info[ids].y ** 2 > 200 ** 2)
+            continue;
+        break;
     }}catch(e){console.log(e);}
 }
 function newdisplay(room) {
