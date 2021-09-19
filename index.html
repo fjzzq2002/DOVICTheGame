@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+#myNumberInput::-webkit-inner-spin-button, 
+        #myNumberInput::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0;
+        }
+#myNumberInput {
+            text-align: center;
+  outline: 0;
+  border-width: 0 0 2px;
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+<script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/socket.js"></script>
+<script src="js/randomname.js"></script>
+<script src="js/main_menu.js"></script>
+<script src="js/room_selector.js"></script>
+<script src="js/chatbox.js"></script>
+<!--<script src="js/game_room.js"></script>-->
+<script src="js/help_scene.js"></script>
+<script src="js/waiting_room.js"></script>
+<script src="js/game_scene.js"></script>
+<script src="js/minigame.js"></script>
+<script src="js/bottom_banner.js"></script>
+<script src="js/voting_room.js"></script>
+<script src="js/final_scene.js"></script>
+<!--<script src="js/game.js"></script>-->
+</head>
+<body>
+<div class="font_preload" style="opacity: 0">
+<span style="font-family: 'Montserrat', Arial, sans-serif;"></span>
+<span style="font-family: 'Inconsolata', Arial, sans-serif;"></span>
+</div>
+<div id="game"></div>
+<script>
+const game=new Phaser.Game({
+    type: Phaser.AUTO,
+    parent: "game",
+    width: 1000,
+    height: 750,
+    backgroundColor: "#FDF6E3",
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: false //true
+        }
+    },
+    scene: [main_menu, room_selector, waiting_room, game_scene, unscramble_scene, bottom_banner, voting_room, calcgame_scene, help_scene, final_scene],
+    dom: {
+        createContainer: true
+    },
+});
+</script>
+</body>
+</html>
