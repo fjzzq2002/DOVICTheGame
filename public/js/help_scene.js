@@ -7,7 +7,7 @@ var help_scene = new Phaser.Class({
     preload: function() {
         this.load.image('title', "assets/dovic.png");
         this.counter = 1;
-        this.nums = 6;
+        this.nums = 7;
         for (var i = 1; i <= this.nums; i += 1) 
             this.load.image('image' + i, 'assets/tutorial'+i+'.png');
         this.load.scenePlugin({
