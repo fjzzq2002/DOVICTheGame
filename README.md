@@ -23,7 +23,7 @@ Run `node server.js` to start a local server. The game can be accessed at 127.0.
 ![IMG_1850](https://user-images.githubusercontent.com/43299168/133931913-47074d22-de31-4807-8f81-852c868f1e5d.PNG)
 #### Student wearing a mask
 ![IMG_1851](https://user-images.githubusercontent.com/43299168/133931908-62fa214e-501b-4d12-98f2-565f63cb418b.PNG)
-#### Student experiencing symptoms
+#### Student in quests
 ![IMG_1848](https://user-images.githubusercontent.com/43299168/133931917-9961b344-c16f-47d1-8750-cbb9403ca663.PNG)
 #### Student experiencing symptoms
 ![IMG_1847](https://user-images.githubusercontent.com/43299168/133931919-3813c9f3-cff0-45d7-9a92-8004ecdd0fe1.PNG)
