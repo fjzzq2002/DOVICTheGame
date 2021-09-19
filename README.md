@@ -9,7 +9,7 @@ Run `node server.js` to start a local server.
 
 #### Screenshots
 
-
+## Players wearing a mask
 ![IMG_1851](https://user-images.githubusercontent.com/43299168/133931908-62fa214e-501b-4d12-98f2-565f63cb418b.PNG)
 ![IMG_1850](https://user-images.githubusercontent.com/43299168/133931913-47074d22-de31-4807-8f81-852c868f1e5d.PNG)
 ![IMG_1849](https://user-images.githubusercontent.com/43299168/133931914-f5482778-4241-4093-bf6a-5502e40e6aef.PNG)
