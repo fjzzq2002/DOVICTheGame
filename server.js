@@ -100,13 +100,13 @@ function get_info_of_room(room) {
             infects_to_win: infects_to_win, 
             votes_info: votes_info[room]
         }; 
-    }catch(e){}
+    }catch(e){console.log(e);}
     // end_type : 1 if most win, -1 if super wins, 0 if continuing
 }
 function build_wall(scene,x1,y1,x2,y2) {
     try {
     tot_walls.push([x1, y1, x2, y2]);
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function build_room(scene,x1,x2,y1,y2,ud,dd,ld,rd) {
     try{
@@ -119,7 +119,7 @@ function build_room(scene,x1,x2,y1,y2,ud,dd,ld,rd) {
     build_wall(scene,x1,y1-10,x1,my-ld/2);
     build_wall(scene,x1,my+ld/2,x1,y2+10);
     build_wall(scene,x2,y1-10,x2,my-rd/2);
-    build_wall(scene,x2,my+rd/2,x2,y2+10);}catch(e){}
+    build_wall(scene,x2,my+rd/2,x2,y2+10);}catch(e){console.log(e);}
 }
 function build_rooms(scene) {
     try{
@@ -147,14 +147,14 @@ function build_rooms(scene) {
     build_room(scene,x1+60,x1+200+60,y1-200,y1,0,200,0,0);
     build_room(scene,x1-200,x1,y1+60,y1+200+60,200,0,0,0);
     build_room(scene,x1+60,x1+200+60,y1+60,y1+200+60,0,0,200,0);
-    build_room(scene, -870, -770, -30, 70, 0, 0, 0, 0);}catch(e){}
+    build_room(scene, -870, -770, -30, 70, 0, 0, 0, 0);}catch(e){console.log(e);}
 }
 
 build_rooms(1);
 function dif(a, b) {
     try{
     return [a[0] - b[0], a[1] - b[1]];
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function smt(a, b) {
     try{
@@ -162,7 +162,7 @@ function smt(a, b) {
     if (res > 0) return 1;
     if (res == 0) return 0;
     return -1;
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function chk(a, b, c, d) {
     try{
@@ -170,7 +170,7 @@ function chk(a, b, c, d) {
     if (smt(dif(c, a), dif(b, a)) == smt(dif(d, a), dif(b, a))) return 0;
     if (smt(dif(a, c), dif(d, c)) == smt(dif(b, c), dif(d, c))) return 0;
     return 1;
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function chk_seg(a, b) {
     try{
@@ -180,12 +180,12 @@ function chk_seg(a, b) {
         if (chk(a, b, cc, cd)) return 0;
     }
     return 1;
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function newvote(room) {
     try{
     room_phase[room] = 1;
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function ran_pl(ids) {
     try{
@@ -194,7 +194,7 @@ function ran_pl(ids) {
         player_info[ids].y = gen_rand([-300, 300]);
         
         if (player_info[ids].x ** 2 + player_info[ids].y ** 2 > 200 ** 2) continue;
-    }}catch(e){}
+    }}catch(e){console.log(e);}
 }
 function newdisplay(room) {
     try{
@@ -238,7 +238,7 @@ function newdisplay(room) {
             console.log("sep", ids, max_id);
         }
     } 
-    }catch(e){}
+    }catch(e){console.log(e);}
     // console.log(player_info);
 }
 function newday(room) {
@@ -263,7 +263,7 @@ function newday(room) {
                 player_info[ids].to_meet[0] = eid;
         }
     }
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function check_end_phase(room) {
     try{
@@ -287,7 +287,7 @@ function check_end_phase(room) {
         }
     }
     return 0;
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 
 function check_end_game(room) {
@@ -305,13 +305,13 @@ function check_end_game(room) {
     if (grads >= total - 2) room_res[room] = 1;
     else if (room_infects[room] >= infects_to_win) room_res[room] = -1;
     else room_res[room] = 0;
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function gen_rand(u) {
     try{
     var x=u[0],y=u[1];
     return x + Math.floor(Math.random() * (y - x + 1));
-}catch(e){}
+}catch(e){console.log(e);}
 }
 function try_infect(sta, dest) {
     try{
@@ -326,7 +326,7 @@ function try_infect(sta, dest) {
         set_state(dest, 1);
         console.log('congrats! player '+dest+' is infected!!! dis='+dis+" rad="+rad);
     }
-}catch(e){}
+}catch(e){console.log(e);}
 }
 function set_state(dest, state) {
     try{
@@ -335,7 +335,7 @@ function set_state(dest, state) {
     var cp = player_info[dest];
     if (state == 1 && !cp.is_super) 
         room_infects[room_id[dest]] += 1;
-    }catch(e){}
+    }catch(e){console.log(e);}
 }
 function pset_inc(id, r) {
     try{
@@ -347,7 +347,7 @@ function pset_inc(id, r) {
         player_info[id].tot_psets += 1;
     }
     player_info[id].pset_progress = fr;
-}catch(e){}
+}catch(e){console.log(e);}
 }
 
 io.on('connection', function (socket) {
@@ -357,7 +357,7 @@ io.on('connection', function (socket) {
         for (t of room_member[room]) {
             io.to(t).emit('update_info', info);
         }
-    }catch(e){}
+    }catch(e){console.log(e);}
     }
     console.log('a user connected');
     var leave_room=function() {
@@ -367,13 +367,13 @@ io.on('connection', function (socket) {
             room_member[room].delete(id);
         }
         room_id[id]=null;
-    }catch(e){}
+    }catch(e){console.log(e);}
     };
     function get_nick(id) {
         try{
         if(nick[id]) return nick[id];
         return id;
-    }catch(e){}
+    }catch(e){console.log(e);}
     }
     socket.on("vote", function(dest){
         try{
@@ -381,7 +381,7 @@ io.on('connection', function (socket) {
         console.log("vote", sta, dest);
         player_info[sta].vote = dest;
         room = room_id[sta];
-    }catch(e){}
+    }catch(e){console.log(e);}
     })
     socket.on("get_pset", function() {
         try{
@@ -389,14 +389,14 @@ io.on('connection', function (socket) {
         var id = socket.id;
         if (player_info[id].tot_psets < psets_to_grad)
             player_info[id].pset_progress = Math.max(0, player_info[id].pset_progress);
-        }catch(e){}
+        }catch(e){console.log(e);}
     })
     socket.on('join_group', function(groupid) {
         try{
         var id = socket.id;
         if(!player_info[id]) return;
         player_info[id].groupid = groupid;
-    }catch(e){}
+    }catch(e){console.log(e);}
     })
     socket.on('pset_progress', function() {
         try{
@@ -406,7 +406,7 @@ io.on('connection', function (socket) {
         for (ids of room_member[room]) 
             if (player_info[ids].groupid == nowgp)
                 pset_inc(ids, 1 + player_info[id].buff);
-            }catch(e){}
+            }catch(e){console.log(e);}
     })
     socket.on("start_game",function(room) {
         try{
@@ -456,7 +456,7 @@ io.on('connection', function (socket) {
             player_info[t] = u;
             cnt += 1;
         }
-    }catch(e){}
+    }catch(e){console.log(e);}
 //        console.log(supid,total_num,cnt);
         room_watchers[room] = setInterval(function() { //check if any infection should happen
             try{
@@ -493,18 +493,18 @@ io.on('connection', function (socket) {
                 }
             }
             check_end_game(room);
-        }catch(e){}
+        }catch(e){console.log(e);}
         },10);
     });
     socket.on("set_name", function(nickname) {
         try{
         nick[socket.id]=nickname;
-    }catch(e){}
+    }catch(e){console.log(e);}
     });
     socket.on("shut_game", function(room) {
         try{
         clearInterval(room_watchers[room]);
-    }catch(e){}
+    }catch(e){console.log(e);}
     });
     socket.on('update', function(state) { // update info
         //console.log('user state updated');
@@ -526,13 +526,13 @@ io.on('connection', function (socket) {
         if (player_info[id].is_super)
             player_info[id].infected_state = state.infected_state;
         update_state(room);
-    }catch(e){}
+    }catch(e){console.log(e);}
     });
     socket.on('disconnect', function () {
         try{
         console.log('user disconnected');
         leave_room();
-    }catch(e){}
+    }catch(e){console.log(e);}
     });
     socket.on('chatmessage', function (msg, room) {
         try{
@@ -541,7 +541,7 @@ io.on('connection', function (socket) {
             io.to(t).emit('newchat', "<" + get_nick(id) + ">: " + msg);
         }
         console.log("received");
-    }catch(e){}
+    }catch(e){console.log(e);}
     });
     socket.on("connect_room",function(room) {
         try{
@@ -576,12 +576,12 @@ io.on('connection', function (socket) {
         console.log('cur room size:'+room_member[room].size);
         room_id[id]=room;
         socket.emit('connect_room_pong','ok');
-    }catch(e){}
+    }catch(e){console.log(e);}
     });
     socket.on("set_ready",function(state) {
         try{
         is_ready[socket.id]=state;
-    }catch(e){}
+    }catch(e){console.log(e);}
     });
     socket.on("player_list_ping",function(room) {
         try{
@@ -591,7 +591,7 @@ io.on('connection', function (socket) {
             list_pl.push([get_nick(t),is_ready[t]]);
         }
         socket.emit("player_list_pong",list_pl);
-    }catch(e){}
+    }catch(e){console.log(e);}
     });
     socket.on("leave_room",leave_room);
 
