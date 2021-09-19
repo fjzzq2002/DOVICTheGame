@@ -9,8 +9,8 @@ app.use(express.static(__dirname+'/public'));
 app.get('/',function(req,res) {
     res.sendFile(__dirname+'/index.html');
 });
-server.listen(8084,function() {
-    console.log('server started at 8084');
+server.listen(8086,function() {
+    console.log('server started at 8086');
 });
 //the room each user is connecting
 var nick={};
@@ -86,7 +86,9 @@ var ptime = [90000, 60000, 5000];
 //var ptime = [3000, 10000, 10000];
 var tot_walls = [];
 
+
 function get_info_of_room(room) {
+    if(!room_member[room]) return {};
     try {
     cur_info = {};
     for (ids of room_member[room]) 
@@ -188,6 +190,7 @@ function newvote(room) {
     }catch(e){console.log(e);}
 }
 function ran_pl(ids) {
+    if(!player_info[ids]) return;
     try{
     while (1) {
         player_info[ids].x = gen_rand([-300, 300]);
@@ -199,23 +202,22 @@ function ran_pl(ids) {
     }}catch(e){console.log(e);}
 }
 function newdisplay(room) {
+    if(!room_member[room]) return;
     try{
     room_phase[room] = 2;
     var max_id = -1
     var max_num = 0;
-    for (voters of room_member[room]) 
+    for (voters of room_member[room]) if(player_info[voters])
         if (player_info[voters].vote == '')
             max_num++;
-    for (ids of room_member[room]) 
+    for (ids of room_member[room]) if(player_info[ids])
         if (player_info[ids].is_sep)
-            ran_pl(ids), 
-            console.log('freed',ids),
-            console.log(player_info[ids].x),
+            ran_pl(ids),
             player_info[ids].is_sep = 0;
 
     for (ids of room_member[room]) {
         var cnt = 0;
-        for (voters of room_member[room]) 
+        for (voters of room_member[room]) if(player_info[voters])
             if (player_info[voters].vote == ids)
                 cnt += 1;
         if (cnt > max_num) {
@@ -231,7 +233,7 @@ function newdisplay(room) {
     else if (player_info[max_id].is_super) votes_info[room].correct += 1;
     else votes_info[room].wrong += 1;
 
-    for (ids of room_member[room]) {
+    for (ids of room_member[room]) if(player_info[ids]) {
         player_info[ids].vote = 0; // not yet; -1 skip
         if (ids == max_id) {
             player_info[ids].x = -850;
@@ -244,6 +246,7 @@ function newdisplay(room) {
     // console.log(player_info);
 }
 function newday(room) {
+    if(!room_member[room]) return;
     try{
     room_phase[room] = 0;
     room_day[room] += 1;
@@ -251,7 +254,7 @@ function newday(room) {
         room_res[room] = -1;
     
     /*buff*/
-    for (ids of room_member[room]) {
+    for (ids of room_member[room]) if(player_info[ids]) {
         if (player_info[ids].to_meet[1]) 
             player_info[ids].buff = 1;
         else
@@ -268,6 +271,7 @@ function newday(room) {
     }catch(e){console.log(e);}
 }
 function check_end_phase(room) {
+    if(!room_member[room]) return 0;
     try{
     var flag = 0;
 
@@ -293,6 +297,7 @@ function check_end_phase(room) {
 }
 
 function check_end_game(room) {
+    if(!room_member[room]) return 0;
     try{
     // 0 : if not ended; -1 if super spreader wins; 1 ow
     if (room_res[room] != 0) return ;
@@ -316,6 +321,8 @@ function gen_rand(u) {
 }catch(e){console.log(e);}
 }
 function try_infect(sta, dest) {
+    if(!player_info[sta]) return;
+    if(!player_info[dest]) return;
     try{
     var pa=player_info[sta], pb=player_info[dest];
     if (pb.infected_state != 0) return ;
@@ -331,15 +338,17 @@ function try_infect(sta, dest) {
 }catch(e){console.log(e);}
 }
 function set_state(dest, state) {
+    if(!player_info[dest]) return;
     try{
     player_info[dest].infected_state = state;
     player_info[dest].state_end_time = Date.now() + gen_rand(lst_range[state]) * 1000;
     var cp = player_info[dest];
-    if (state == 1 && !cp.is_super) 
+    if (state == 1 && !cp.is_super) if(room_infects[room_id[dest]]!=undefined)
         room_infects[room_id[dest]] += 1;
     }catch(e){console.log(e);}
 }
 function pset_inc(id, r) {
+    if(!player_info[id]) return;
     try{
     var fr = player_info[id].pset_progress;
     if (fr == -1) return ;
@@ -354,6 +363,7 @@ function pset_inc(id, r) {
 
 io.on('connection', function (socket) {
     function update_state(room) {
+        if(!room_member[room]) return;
         try{
         var info=get_info_of_room(room);
         for (t of room_member[room]) {
@@ -364,8 +374,10 @@ io.on('connection', function (socket) {
     console.log('a user connected');
     var leave_room=function() {
         try{
-        var id=socket.id,room=room_id[id];
-        if(room) {
+        var id=socket.id;
+        if(null==room_id[id]) return;
+        var room=room_id[id];
+        if(room!=null&&room_member[room]) {
             room_member[room].delete(id);
         }
         room_id[id]=null;
@@ -380,15 +392,16 @@ io.on('connection', function (socket) {
     socket.on("vote", function(dest){
         try{
         var sta = socket.id;
+        if(!player_info[sta]) return;
         console.log("vote", sta, dest);
         player_info[sta].vote = dest;
-        room = room_id[sta];
     }catch(e){console.log(e);}
     })
     socket.on("get_pset", function() {
         try{
-        console.log('get_pset');
+//        console.log('get_pset');
         var id = socket.id;
+        if(!player_info[id]) return;
         if (player_info[id].tot_psets < psets_to_grad)
             player_info[id].pset_progress = Math.max(0, player_info[id].pset_progress);
         }catch(e){console.log(e);}
@@ -403,7 +416,10 @@ io.on('connection', function (socket) {
     socket.on('pset_progress', function() {
         try{
         var id = socket.id;
+        if(!player_info[id]) return;
+        if(room_id[id]==null) return;
         var room = room_id[id];
+        if(room_member[room]==null) return;
         var nowgp = player_info[id].groupid;
         for (ids of room_member[room]) 
             if (player_info[ids].groupid == nowgp)
@@ -412,6 +428,7 @@ io.on('connection', function (socket) {
     })
     socket.on("start_game",function(room) {
         try{
+        if(!room_membet[room]) return;
         if(room_state[room]) return;
         room_infects[room] = 0;
         room_day[room] = 1;
@@ -465,13 +482,13 @@ io.on('connection', function (socket) {
                 check_end_phase(room);
             if (room_phase[room] == 0 && (room_day[room] != 1 || phase_time[room] < Date.now() - 10000)) {
                 // infect and progress of infections
-                for (sta of room_member[room]) {
+                for (sta of room_member[room]) if(player_info[sta]) {
                     if (player_info[sta].infected_state < 2) continue; 
                     for (dest of room_member[room]) 
                         try_infect(sta, dest);
                 }
                 curtime = Date.now();
-                for (ids of room_member[room]) {
+                for (ids of room_member[room]) if(player_info[sta]) {
                     if (player_info[ids].infected_state == 0) continue;
                     if (player_info[ids].is_super) continue;
                     if (curtime > player_info[ids].state_end_time) {
@@ -483,8 +500,8 @@ io.on('connection', function (socket) {
             }
 
             //check distance
-            for (sta of room_member[room]) {
-                for (dest of room_member[room]) {
+            for (sta of room_member[room]) if(player_info[sta]) {
+                for (dest of room_member[room]) if(player_info[dest]) {
                     if (dest == player_info[sta].to_meet[0]) {
                         var dis = 
                         (player_info[sta].x - player_info[dest].x) ** 2
@@ -505,6 +522,7 @@ io.on('connection', function (socket) {
     });
     socket.on("shut_game", function(room) {
         try{
+            if(room_watchers[room])
         clearInterval(room_watchers[room]);
     }catch(e){console.log(e);}
     });
@@ -513,7 +531,9 @@ io.on('connection', function (socket) {
         //console.log(player_info);
         try{
         var id = socket.id;
+        if(room_id[id]==null) return;
         var room = room_id[id];
+        if(!player_info[id]) return;
         var nx = player_info[id].x;
         var ny = player_info[id].y;
         var flag = 1;
@@ -538,6 +558,7 @@ io.on('connection', function (socket) {
     });
     socket.on('chatmessage', function (msg, room) {
         try{
+        if(!room_member[room]) return;
         var id=socket.id;
         for(var t of room_member[room]) {
             io.to(t).emit('newchat', "<" + get_nick(id) + ">: " + msg);
@@ -558,6 +579,15 @@ io.on('connection', function (socket) {
         var id=socket.id;
         if (get_nick(id) == "Skip Voting") {
             socket.emit('connect_room_pong','please do not use this nick');
+            return;
+        }
+        function valid_nick(nick) {
+            var letters = /^[A-Za-z0-9_]+$/;
+            if(!nick.match(letters)) return false;
+            return nick.length<=11&&nick.length>=1;
+        }
+        if (!valid_nick(get_nick(id))) {
+            socket.emit('connect_room_pong','invalid nick, must be [1,11] in len, alphabets digits underscore');
             return;
         }
         if (room_member[room]) {
@@ -589,7 +619,7 @@ io.on('connection', function (socket) {
         try{
         if(!room_member[room]) return;
         var list_pl=[];
-        for(var t of room_member[room]) {
+        for(var t of room_member[room]) if(is_ready[t]!=null) {
             list_pl.push([get_nick(t),is_ready[t]]);
         }
         socket.emit("player_list_pong",list_pl);
