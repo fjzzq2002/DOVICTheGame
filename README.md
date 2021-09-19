@@ -3,6 +3,8 @@ The game named DOVIC in which students fight an evil super spreader by practicin
 
 A HackMIT project by Andi Liu, Mingyang Deng, Shengtong Zhang, Ziqian Zhong.
 
+The history commits can be seen at https://github.mit.edu/ziqianz/game.
+
 #### Setup
 
 Run `node server.js` to start a local server. The game can be accessed at 127.0.0.1:8084.
