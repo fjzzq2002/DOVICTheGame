@@ -428,7 +428,7 @@ io.on('connection', function (socket) {
     })
     socket.on("start_game",function(room) {
         try{
-        if(!room_membet[room]) return;
+        if(!room_member[room]) return;
         if(room_state[room]) return;
         room_infects[room] = 0;
         room_day[room] = 1;
