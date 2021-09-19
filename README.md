@@ -10,7 +10,7 @@ Run `node server.js` to start a local server. The game can be accessed at 127.0.
 #### Notes
 
 1. The circle around each player denotes the infection radius. 
-2. The super spreader has three modes. Press "1" to not infect anyone, press "2" to become infectious, and press "3" to become symptomatic.
+2. The super spreader can pretend to be a normal player with three modes. Press "1" to not infect anyone, press "2" to become infectious, and press "3" to become symptomatic. Note that the default is mode 1, so you need to press "2" to start infecting others.
 
 #### Screenshots
 
@@ -19,12 +19,13 @@ Run `node server.js` to start a local server. The game can be accessed at 127.0.
 ## Waiting Room
 ![IMG_1849](https://user-images.githubusercontent.com/43299168/133931914-f5482778-4241-4093-bf6a-5502e40e6aef.PNG)
 ## Players
-#### Normal User
+#### Normal Student
 ![IMG_1850](https://user-images.githubusercontent.com/43299168/133931913-47074d22-de31-4807-8f81-852c868f1e5d.PNG)
-#### User wearing a mask
+#### Student wearing a mask
 ![IMG_1851](https://user-images.githubusercontent.com/43299168/133931908-62fa214e-501b-4d12-98f2-565f63cb418b.PNG)
-#### User experiencing symptoms
+#### Student experiencing symptoms
 ![IMG_1848](https://user-images.githubusercontent.com/43299168/133931917-9961b344-c16f-47d1-8750-cbb9403ca663.PNG)
+#### Student experiencing symptoms
 ![IMG_1847](https://user-images.githubusercontent.com/43299168/133931919-3813c9f3-cff0-45d7-9a92-8004ecdd0fe1.PNG)
 ## Minigames!
 ![IMG_1846](https://user-images.githubusercontent.com/43299168/133931920-341937d2-dee7-4b8a-8abf-e3494cc553eb.PNG)
