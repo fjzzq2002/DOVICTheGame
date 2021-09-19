@@ -155,7 +155,7 @@ var voting_room = new Phaser.Class({
                     bt.destroy();
                 }
                 passed_out=true;
-//                socket.off('update_info', check_info);
+                socket.off('update_info', check_info);
                 r.destroy();
                 self.scene.stop();
             }
