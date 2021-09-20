@@ -90,10 +90,10 @@ makeChatBox = function (scene, socket, room, scene2=scene) {
     socket.on("newchat", function (msg) {
         messages.push(msg)
         var chatstr = "";
-        for (var i = messages.length - 1; i >= Math.max(0, messages.length - 4); i--) {
+        for (var i = Math.max(0, messages.length - 4); i < messages.length; ++i) {
             chatstr += messages[i] + "\n";
         }
         textBox.text = chatstr;
-        setTimeout(function(){textBox.scrollTop=0;textBox.scrollLeft=0;},100);
+//        setTimeout(function(){textBox.scrollTop=0;textBox.scrollLeft=0;},100);
     });
 };
