@@ -68,7 +68,10 @@ var voting_room = new Phaser.Class({
         backgroundColor: '#FFDE93'}).setOrigin(0.5,0).setScrollFactor(0);
         nums[-1]=self.add.text(30, 40, "Let's Vote!", { fontSize: '34px', fill: '#000',
         fontFamily: 'Montserrat',align:'center', fontStyle: "bold"}).setOrigin(0);
-        nums[-2]=self.add.text(30, 90, "You may change your vote after casting as long as someone else hasn't vote.", { fontSize: '20px', fill: '#000',
+        nums[-2]=self.add.text(30, 90, "You may change your vote after casting as long as someone else hasn't vote.",
+        { fontSize: '20px', fill: '#000',
+        fontFamily: 'Montserrat',align:'center'}).setOrigin(0);
+        nums[-5]=self.add.text(30, 680, "Your vote is: ", { fontSize: '20px', fill: '#000',
         fontFamily: 'Montserrat',align:'center'}).setOrigin(0);
         for(var bt of buttons) {
             console.log(bt);
@@ -80,6 +83,7 @@ var voting_room = new Phaser.Class({
             .on('button.click', function (button, index, pointer, event) {
                 if(!vote_open) return;
                 console.log("You voted " + button.text);
+                num[-5].text="Your vote is: "+button.text;
                 if(button.text=='Skip Voting') {
                     socket.emit('vote','');
                 }
