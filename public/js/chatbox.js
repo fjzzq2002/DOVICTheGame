@@ -49,7 +49,11 @@ makeChatBox = function (scene, socket, room, scene2=scene) {
 
     chatBox.node.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
-            socket.emit("chatmessage", chatBox.text.slice(0,-1), room);
+            var txt=chatBox.text.slice(0,-1);
+            var not_empty=false;
+            for(var t of txt) if(t!=' '||t!='\n') not_empty=true;
+            if(not_empty)
+                socket.emit("chatmessage", txt, room);
             chatBox.text = "";
             document.getElementById("textBox").focus();
 
