@@ -71,7 +71,7 @@ var voting_room = new Phaser.Class({
         nums[-2]=self.add.text(30, 90, "You may change your vote after casting as long as someone else hasn't vote.",
         { fontSize: '20px', fill: '#000',
         fontFamily: 'Montserrat',align:'center'}).setOrigin(0);
-        nums[-5]=self.add.text(30, 580, "", { fontSize: '20px', fill: '#000',
+        nums[-5]=self.add.text(30, 570, "", { fontSize: '20px', fill: '#000',
         fontFamily: 'Montserrat',align:'center'}).setOrigin(0);
         for(var bt of buttons) {
             console.log(bt);
@@ -84,7 +84,7 @@ var voting_room = new Phaser.Class({
                 if(!vote_open) return;
                 console.log("You voted " + button.text);
                 if(button.text=='Skip Voting') {
-                    nums[-5].text="Your skipped your vote.";
+                    nums[-5].text="You skipped your vote.";
                     socket.emit('vote','');
                 }
                 else {
@@ -124,7 +124,7 @@ var voting_room = new Phaser.Class({
             }
             if (info_dic['phase'] == 2 && !bar_drawn) {
                 if(nums[-5].text=='')
-                    nums[-5].text="Your skipped your vote.";
+                    nums[-5].text="You skipped your vote.";
                 vote_open=false;
                 var sad_news=null;
                 for(var a of Object.values(info_dic.player_info)) {
