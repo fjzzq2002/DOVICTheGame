@@ -315,7 +315,7 @@ function check_end_game(room) {
         total += 1;
         if (cur.tot_psets >= psets_to_grad) grads += 1;
     }
-    if (grads >= total - 2) room_res[room] = 1;
+    if (grads >= Math.max(total - 2, 1)) room_res[room] = 1;
     else if (room_infects[room] >= infects_to_win) room_res[room] = -1;
     else room_res[room] = 0;
     }catch(e){console.log(e);}
