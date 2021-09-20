@@ -591,10 +591,10 @@ io.on('connection', function (socket) {
         function valid_nick(nick) {
             var letters = /^[A-Za-z0-9_]+$/;
             if(!nick.match(letters)) return false;
-            return nick.length<=11&&nick.length>=1;
+            return nick.length<=12&&nick.length>=1;
         }
         if (!valid_nick(get_nick(id))) {
-            socket.emit('connect_room_pong','invalid nick, must be [1,11] in len, alphabets digits underscore');
+            socket.emit('connect_room_pong','invalid nick, must be [1,12] in len, alphabets digits underscore');
             return;
         }
         if (room_member[room]) {
