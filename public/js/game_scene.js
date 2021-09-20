@@ -358,6 +358,7 @@ function focus_chat(event) {
     if(voting) return;
     console.log('C');
     if(thechatBox!=null) {
+        event.preventDefault();
         thechatBox.setFocus();
     }
 }

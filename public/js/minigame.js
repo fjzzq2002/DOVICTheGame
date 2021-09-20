@@ -166,6 +166,10 @@ unscramble = function (scene, pset_type, scene2) {
         all_quitters.push(quit);
         // handle keyboard input
         wordBox.node.addEventListener("keypress", function (evt) {
+            if(evt.which==32) {
+                evt.preventDefault();
+                swap(); return;
+            }
             if (evt.which != 8 && evt.which != 0 && evt.which > 127) {
                 evt.preventDefault();
                 console.log(evt.which);
