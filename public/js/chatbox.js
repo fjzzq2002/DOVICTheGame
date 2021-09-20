@@ -88,10 +88,11 @@ makeChatBox = function (scene, socket, room, scene2=scene) {
     });
     socket.removeAllListeners("newchat");
     socket.on("newchat", function (msg) {
-        messages.push(msg)
+        messages.push(msg);
         var chatstr = "";
         for (var i = Math.max(0, messages.length - 4); i < messages.length; ++i) {
-            chatstr += messages[i] + "\n";
+            if(chatstr!='') chatstr+='\n';
+            chatstr += messages[i];
         }
         textBox.text = chatstr;
 //        setTimeout(function(){textBox.scrollTop=0;textBox.scrollLeft=0;},100);
