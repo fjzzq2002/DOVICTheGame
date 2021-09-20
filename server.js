@@ -9,8 +9,9 @@ app.use(express.static(__dirname+'/public'));
 app.get('/',function(req,res) {
     res.sendFile(__dirname+'/index.html');
 });
-server.listen(8086,function() {
-    console.log('server started at 8086');
+var port=233;
+server.listen(port,function() {
+    console.log('server started at '+port);
 });
 //the room each user is connecting
 var nick={};
@@ -377,7 +378,7 @@ io.on('connection', function (socket) {
         }
     }catch(e){console.log(e);}
     }
-    console.log('a user connected');
+    console.log('user '+socket.id+' connected');
     var leave_room=function() {
         try{
         var id=socket.id;
@@ -558,7 +559,7 @@ io.on('connection', function (socket) {
     });
     socket.on('disconnect', function () {
         try{
-        console.log('user disconnected');
+        console.log('user '+socket.id+' disconnected');
         leave_room();
     }catch(e){console.log(e);}
     });

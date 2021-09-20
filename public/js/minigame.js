@@ -191,8 +191,14 @@ unscramble = function (scene, pset_type, scene2) {
                     break;
                 }
             }
-            // backspace
-            // not implemented
+        });
+        wordBox.node.addEventListener("keydown", function (evt) {
+            switch(evt.keyCode) {
+                case 8: case 46:
+                    reset();
+                    break;
+                default: break;
+            }
         });
     }
 

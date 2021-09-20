@@ -49,7 +49,7 @@ makeChatBox = function (scene, socket, room, scene2=scene) {
 
     chatBox.node.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
-            var txt=chatBox.text.slice(0,-1);
+            var txt=chatBox.text;
             var real_txt='';
             for(var t of txt) if(t!='\n'&&t!='\r') real_txt+=t;
             if(real_txt!='')
