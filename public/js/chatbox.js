@@ -50,7 +50,7 @@ makeChatBox = function (scene, socket, room, scene2=scene) {
         readOnly: true
     }).setScrollFactor(0).resize(320, 100).setOrigin(0.5);
 
-    wordBox.node.addEventListener("keydown", function (evt) {
+    chatBox.node.addEventListener("keydown", function (evt) {
         switch(evt.keyCode) {
             case 27:
                 chatBox.text = "";
