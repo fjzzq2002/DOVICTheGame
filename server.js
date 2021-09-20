@@ -76,8 +76,8 @@ var pset_size = 40;
     server calls client:
         'update_info', player_info // player_info contains the info of players in the room
 */
-var max_day = 6; //temporary test
-var lst_range = [[10000, 10001], [5, 15], [5, 15], [30, 40]];
+var max_day = 6;
+var lst_range = [[10000, 10001], [5, 15], [15, 25], [25, 35]];
 var room_res = {};
 var room_phase = {};
 var phase_time = {};
@@ -284,6 +284,11 @@ function check_end_phase(room) {
         if (all_votes) flag = 1;
     }
     if (flag) {
+        if (room_phase[room] != 0) {
+            var inc = Date.now() - phase_time[room];
+            for (ids of room_member[room]) 
+                player_info[ids].state_end_time += inc;
+        }
         phase_time[room] = Date.now();
         if (room_day[room] == max_day - 1) newday(room);
         else {
@@ -341,7 +346,8 @@ function set_state(dest, state) {
     if(!player_info[dest]) return;
     try{
     player_info[dest].infected_state = state;
-    player_info[dest].state_end_time = Date.now() + gen_rand(lst_range[state]) * 1000;
+    lst_tm = gen_rand(lst_range[state]) * 1000;
+    player_info[dest].state_end_time = Date.now() + lst_tm;
     var cp = player_info[dest];
     if (state == 1 && !cp.is_super) if(room_infects[room_id[dest]]!=undefined)
         room_infects[room_id[dest]] += 1;
