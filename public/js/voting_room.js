@@ -71,7 +71,7 @@ var voting_room = new Phaser.Class({
         nums[-2]=self.add.text(30, 90, "You may change your vote after casting as long as someone else hasn't vote.",
         { fontSize: '20px', fill: '#000',
         fontFamily: 'Montserrat',align:'center'}).setOrigin(0);
-        nums[-5]=self.add.text(30, 570, "", { fontSize: '20px', fill: '#000',
+        nums[-5]=self.add.text(30, 563, "", { fontSize: '20px', fill: '#000',
         fontFamily: 'Montserrat',align:'center'}).setOrigin(0);
         for(var bt of buttons) {
             console.log(bt);
