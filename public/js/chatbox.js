@@ -12,6 +12,8 @@ var createFlexibleButton = function (scene, text, width, height, fontsize, align
     });
 };
 
+thechatBox=null;
+
 makeChatBox = function (scene, socket, room, scene2=scene) {
     var chatbutton = scene.rexUI.add.buttons({
         x: 1000-140, y: 750-40,
@@ -33,6 +35,7 @@ makeChatBox = function (scene, socket, room, scene2=scene) {
                 backgroundColor: 'white',
                 maxLength: 56
     }).setScrollFactor(0).resize(350, 60).setOrigin(0.5);
+    thechatBox=chatBox;
 
     // the output box
     var textBox = scene.add.rexInputText(1000-560, 750-80, 5, 10, {

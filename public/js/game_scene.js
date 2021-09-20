@@ -134,6 +134,7 @@ function create() {
 
     this.input.keyboard.on('keydown-E', function () {get_do_pset(self);});
     this.input.keyboard.on('keydown-M', toggle_mask);
+    this.input.keyboard.on('keydown-C', focus_chat);
 
     this.physics.world.setBounds(-1000, -1000, 2000, 2000); 
     graphics = this.add.graphics();
@@ -349,6 +350,16 @@ function toggle_mask(event) {
     if(voting) return;
     console.log('M');
     mask_status=!mask_status;
+}
+
+
+function focus_chat(event) {
+    if (ingame) return ;
+    if(voting) return;
+    console.log('C');
+    if(thechatBox!=null) {
+        thechatBox.focus();
+    }
 }
 var lastUpdate=Date.now();
 ingame = 0;
