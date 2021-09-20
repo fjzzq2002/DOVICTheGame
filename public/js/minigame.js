@@ -197,6 +197,9 @@ unscramble = function (scene, pset_type, scene2) {
                 case 8: case 46:
                     reset();
                     break;
+                case 27:
+                    quit();
+                    break;
                 default: break;
             }
         });
@@ -370,6 +373,14 @@ calcgame = function (scene, pset_type, scene2) {
             setTimeout(chkgame,300);
             setTimeout(chkgame,500);
             setTimeout(chkgame,700);
+        });
+        wordBox.node.addEventListener("keydown", function (evt) {
+            switch(evt.keyCode) {
+                case 27:
+                    quit();
+                    break;
+                default: break;
+            }
         });
     };
 

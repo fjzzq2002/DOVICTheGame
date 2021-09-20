@@ -358,7 +358,7 @@ function focus_chat(event) {
     if(voting) return;
     console.log('C');
     if(thechatBox!=null) {
-        thechatBox.focus();
+        thechatBox.setFocus();
     }
 }
 var lastUpdate=Date.now();
