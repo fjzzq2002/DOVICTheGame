@@ -232,7 +232,7 @@ unscramble_scene.init = function (data) {
 unscramble_scene.preload = function () {
     this.load.scenePlugin({
         key: 'rexuiplugin',
-        url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+        url: 'js/rexuiplugin.min.js',
         sceneKey: 'rexUI'
     });
 };
@@ -391,7 +391,7 @@ calcgame_scene.init = function (data) {
 calcgame_scene.preload = function () {
     this.load.scenePlugin({
         key: 'rexuiplugin',
-        url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+        url: 'js/rexuiplugin.min.js',
         sceneKey: 'rexUI'
     });
 };

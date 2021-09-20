@@ -13,10 +13,10 @@ var bottom_banner = new Phaser.Class({
         this.load.image('vampire', "assets/vampire.png");
         this.load.scenePlugin({
             key: 'rexuiplugin',
-            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+            url: 'js/rexuiplugin.min.js',
             sceneKey: 'rexUI'
         });
-        this.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
+        this.load.plugin('rexinputtextplugin', 'js/rexinputtextplugin.min.js', true);
     },
     create: function() {
         this.super_rect=this.add.rectangle(500, 750 - 75, 1000, 150, is_super?0xE3A1A6:0xadadff);

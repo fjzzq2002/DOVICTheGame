@@ -24,10 +24,10 @@ var voting_room = new Phaser.Class({
     preload: function() {
         this.load.scenePlugin({
             key: 'rexuiplugin',
-            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+            url: 'js/rexuiplugin.min.js',
             sceneKey: 'rexUI'
         });
-        this.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
+        this.load.plugin('rexinputtextplugin', 'js/rexinputtextplugin.min.js', true);
     },
     create: function() {
         for(var x of all_quitters) x();
