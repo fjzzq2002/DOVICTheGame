@@ -208,7 +208,7 @@ unscramble = function (scene, pset_type, scene2) {
             box.destroy();
         }
         answer = "";
-        word = dictionary[getRandomInt_(0, dictionary.length + 1)].toUpperCase();
+        word = dictionary[getRandomInt_(0, dictionary.length - 1)].toUpperCase();
         init(word);
     }
 
