@@ -71,7 +71,7 @@ var voting_room = new Phaser.Class({
         nums[-2]=self.add.text(30, 90, "You may change your vote after casting as long as someone else hasn't vote.",
         { fontSize: '20px', fill: '#000',
         fontFamily: 'Montserrat',align:'center'}).setOrigin(0);
-        nums[-5]=self.add.text(30, 680, "Your vote is: ", { fontSize: '20px', fill: '#000',
+        nums[-5]=self.add.text(30, 580, "", { fontSize: '20px', fill: '#000',
         fontFamily: 'Montserrat',align:'center'}).setOrigin(0);
         for(var bt of buttons) {
             console.log(bt);
@@ -83,11 +83,12 @@ var voting_room = new Phaser.Class({
             .on('button.click', function (button, index, pointer, event) {
                 if(!vote_open) return;
                 console.log("You voted " + button.text);
-                num[-5].text="Your vote is: "+button.text;
                 if(button.text=='Skip Voting') {
+                    nums[-5].text="Your skipped your vote.";
                     socket.emit('vote','');
                 }
                 else {
+                    nums[-5].text="Your vote: "+button.text;
                     // find the correct id
                     var id;
                     for (id of Object.keys(list_pl)) {
@@ -122,6 +123,8 @@ var voting_room = new Phaser.Class({
                 nums[-4].text="";
             }
             if (info_dic['phase'] == 2 && !bar_drawn) {
+                if(nums[-5].text=='')
+                    nums[-5].text="Your skipped your vote.";
                 vote_open=false;
                 var sad_news=null;
                 for(var a of Object.values(info_dic.player_info)) {
