@@ -94,8 +94,6 @@ makeChatBox = function (scene, socket, room, scene2=scene) {
             chatstr += messages[i] + "\n";
         }
         textBox.text = chatstr;
-        textBox.scrollTop(0);
-//        textBox.scrollTop=0;
-//        textBox.scrollLeft=0;
+        setTimeout(function(){textBox.scrollTop=0;textBox.scrollLeft=0;},100);
     });
 };
