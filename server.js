@@ -77,6 +77,7 @@ var pset_size = 40;
         'update_info', player_info // player_info contains the info of players in the room
 */
 var max_day = 6;
+var lst_range = [[10000, 10001], [5, 15], [15, 25], [25, 35]];
 var room_res = {};
 var room_phase = {};
 var phase_time = {};
