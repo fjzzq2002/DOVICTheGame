@@ -318,6 +318,7 @@ function check_end_game(room) {
     if (grads >= Math.max(total - 2, 1)) room_res[room] = 1;
     else if (room_infects[room] >= infects_to_win) room_res[room] = -1;
     else room_res[room] = 0;
+    if (room_res[room] != 0) shut_game(room);
     }catch(e){console.log(e);}
 }
 function gen_rand(u) {
@@ -353,6 +354,12 @@ function set_state(dest, state) {
     if (state == 1 && !cp.is_super) if(room_infects[room_id[dest]]!=undefined)
         room_infects[room_id[dest]] += 1;
     }catch(e){console.log(e);}
+}
+function shut_game(room) {
+    if(room_watchers[room])
+        clearInterval(room_watchers[room]);
+    room_member[room] = new Set();
+    room_state[room] = 0;
 }
 function pset_inc(id, r) {
     if(!player_info[id]) return;
@@ -525,12 +532,6 @@ io.on('connection', function (socket) {
     socket.on("set_name", function(nickname) {
         try{
         nick[socket.id]=nickname;
-    }catch(e){console.log(e);}
-    });
-    socket.on("shut_game", function(room) {
-        try{
-            if(room_watchers[room])
-        clearInterval(room_watchers[room]);
     }catch(e){console.log(e);}
     });
     socket.on('update', function(state) { // update info
